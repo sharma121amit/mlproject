@@ -1,5 +1,5 @@
 import sys
-import logging
+from src.logger import logging
 
 
 def error_message_detail(error, error_detail:sys):
@@ -11,9 +11,9 @@ def error_message_detail(error, error_detail:sys):
     return error_message
 
 
-def CustomException(Exception,sys):
+def CustomException(Exception):
     def __init__(self,error_message,error_detail:sys):
-        super(error_message).__init__(error_message)
+        super().__init__(error_message) # see why super param given
         self.error_message=error_message_detail(error_message,error_detail=error_detail)
 
     def __str__(self):
@@ -25,5 +25,5 @@ if __name__=="__main__":
         a=1/0
     except Exception as e:
         logging.info("Divide by Zero error.")
-        raise CustomException(e,sys)
+        raise CustomException(e,sys) #see why 2 params error coming
 
